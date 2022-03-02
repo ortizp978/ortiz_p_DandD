@@ -5,14 +5,20 @@
 		puzzlePieces = document.querySelectorAll(".puzzle-pieces *"),
 		dropZones = document.querySelectorAll(".drop-zone");
 
-		//  .gameBoard {
-		//	background-image: url("../images/backGround1.jpg")
-		//  }
+		// const is a variable whose value can't change - it's immutable. Use this to assign bits of data that will be constant (const) for the entire lifecycle of your app.
 
-	function changeBgImg() {
+		// puzzlePaths refer to half the image src that we need to build -. need to append an index to them
+	const puzzlePaths = ["topLeft", "topRight", "bottomLeft", "bottomRight"]
+
+	function changeImgSet() {
 		// The "this" keyword refers to the elemen that triggers this function (the nav button we click with the custom data attribute of bgref)
 		// debugger;
 		gameBoard.style.backgroundImage = `url(images/background${this.dataset.bgref}.jpg)`;
+
+		// loop through all of the small draggable images and chabge their src attribute with JS
+		puzzlePaths.forEach((img, index) => {
+			puzzlePieces[index].src = `images/${img + this.dataset.bgref}.jpg`
+		});
 	}
 
 	function dragStarted(event) {
@@ -43,7 +49,7 @@
 	}
 
 	// add event handling here -> loop through theThumbnails array and add event handling to each image
-	theThumbnails.forEach(item => item.addEventListener("click", changeBgImg));
+	theThumbnails.forEach(item => item.addEventListener("click", changeImgSet));
 
 	//listen for the dragstarted event on the puzzle puzzlePieces
 	puzzlePieces.forEach(piece => piece.addEventListener ("dragstart", dragStarted));
