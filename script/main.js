@@ -10,6 +10,16 @@
 		// puzzlePaths refer to half the image src that we need to build -. need to append an index to them
 	const puzzlePaths = ["topLeft", "topRight", "bottomLeft", "bottomRight"]
 
+	function detectImg(id){
+
+		var childElements = document.getElementsByClassName(id)[0];
+		if (childElements != null){
+
+		if (childElements.firstChild != null) {
+			return false;}
+		}
+	}
+
 	function changeImgSet() {
 		// The "this" keyword refers to the elemen that triggers this function (the nav button we click with the custom data attribute of bgref)
 		// debugger;
@@ -34,9 +44,11 @@
 	}
 
 	function allowDrop(event) {
-		// turn off the default browser behaviour -> follow our instructions instead of what the brower would normally do on drop
+		// turn off the default browser behaviour -> follow our instructions instead of what the browser would normally do on drop
 		event.preventDefault();
 		console.log('dropped on me');
+
+		if (detectImg(event.currentTarget.className)== false){return;};
 
 		// retrieve the dragged element using the dataTransfer object
 		//this was set in the drag event using the setData method
